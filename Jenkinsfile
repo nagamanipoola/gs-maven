@@ -1,17 +1,24 @@
 pipeline {
 	agent any
 
-	triggers {
-		pollSCM 'H/10 * * * *'
-	}
+	//triggers {
+		//pollSCM 'H/10 * * * *'
+	//}
 
-	options {
-		disableConcurrentBuilds()
-		buildDiscarder(logRotator(numToKeepStr: '14'))
-	}
+	//options {
+	//	disableConcurrentBuilds()
+	//	buildDiscarder(logRotator(numToKeepStr: '14'))
+	//}
 
 	stages {
-		stage("test: baseline (jdk8)") {
+		stage('build'){
+			steps{
+				sh 'mvn clean install'
+			}
+		}
+			
+		}
+		//stage("test: baseline (jdk8)") {
 			//agent {
 			// 	docker {
 			// 		image 'adoptopenjdk/openjdk8:latest'
@@ -25,6 +32,7 @@ pipeline {
 		}
 
 	}
+//}
 
 	// post {
 	// 	changed {
